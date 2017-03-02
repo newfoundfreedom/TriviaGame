@@ -1,15 +1,5 @@
 var bbTrivia = {
 
-// TODO ------------------------------------------------------------------
-// Declare variables
-// - {qaBank} *key can be question# - correct answer needs to be flagged
-// - [gameQuestions] - *randomly generated*
-// - [playerGuesses] - user guesses by question
-// - counter to hold current question number
-// - intervalID to hold value of setInterval
-// TODO ------------------------------------------------------------------
-
-
     // VARIABLE DECLARATION
     qaBank: {
         1: {
@@ -195,51 +185,50 @@ var bbTrivia = {
     counter: 0,
     intervalID: null,
 
-
-//
-// TODO: Create Initialize function
-// - for loop to run 10 times to select 10 unique questions for qaBank for each quiz
-//
-
 // TODO ------------------------------------------------------------------
 //Create on-click function to Start quiz (start button)
 // - runs initialize function
 // - IntervalID = setInterval to run serveQuestion function every 15 seconds
 // TODO ------------------------------------------------------------------
 
-    startGame: function(){
+    startGame: function () {
         this.gameQuestions = [];
         this.gameGuesses = [];
         this.counter = 0;
         this.intervalID = null;
 
-        this.tenRandoQuestions(this.qaBank);
+        this.gameQuestions = this.selectXRandom(this.qaBank, 10);
 
-    },
-
-
-
-
-
-
-    tenRandoQuestions: function (array) {
-        var tempArray = Object.keys(bbTrivia.qaBank);
-        $.each([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], function (index, value) {
-            var questionIndex = tempArray[Math.floor(Math.random() * tempArray.length)];
-            bbTrivia.gameQuestions.push(tempArray[questionIndex]);
-            tempArray.splice(questionIndex,1);
+        $.each(this.gameQuestions, function (index, value) {
+            setTimeout(function () {
+                bbTrivia.qDisplay(value);
+            }, 2 * 1000);
         })
     },
-//
+
+    // select n number of items from a given object
+    // DAMN PROUD OF THIS ONE RIGHT HERE  :)
+    selectXRandom: function (object, qty) {                                      // function that takes an object array as an argument and returns a 'qty' of random items from it
+        var randomItems = [];                                                    // create an array to house selected items
+        var arrayKeys = Object.keys(object);                                     // create an array of all keys in object
+        while (randomItems.length < qty) {                                       // while there still randoms items to select
+            var item = arrayKeys[Math.floor(Math.random() * arrayKeys.length)];  // select a random item
+            if (randomItems.includes(item) === false) {                           // if the selected item has not already been selected, then
+                randomItems.push(item);                                            // add it to the array of selected items
+            }
+        }
+        return randomItems;
+    },
+
+
 // TODO: Create qDisplay function
 // - iterates counter
-// - randomly chooses order in which to show answers
 // - timeout for 2 seconds before running timer function to allow player to read question
 
 
-    qDisplay: function (x) {                                                         //function that takes the question number as an argument then,
+    qDisplay: function (x) {                                                         // function that takes the question number as an argument then,
+        x = parseInt(x);                                                             // ensure selection is being passed as a number
         $('#qStage').text(this.qaBank[x].question);                                  // Displays selected question to screen
-
         for (item in this.qaBank[x].answers) {                                       // Iterates through answers array for given question
             var answer = this.qaBank[x].answers[item];
             $('#aStage').append('<div><label class="btn btn-primary answer-options"><input type="radio" name="options" value=' + answer + '/>' + answer + '</label></div>');  // and displays the questions as radio buttons
@@ -253,8 +242,7 @@ var bbTrivia = {
         // TODO -------------------------------------------------------------------------
         // var ans = this.qaBank[x] + '.G' + num
         // $('#aStage').html('<div>' + this.qaBank[x].ans + '</div>');
-    }
-    ,
+    },
 
 
 // TODO: questionTimer function
