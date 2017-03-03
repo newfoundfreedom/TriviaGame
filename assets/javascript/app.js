@@ -179,7 +179,6 @@ var bbTrivia = {
         }
 
     },
-
     gameQuestions: [],  // container to hold the randomly selected question numbers for current game
     playerGuesses: [],
     counter: 0,
@@ -199,22 +198,35 @@ var bbTrivia = {
 
         this.gameQuestions = this.selectXRandom(this.qaBank, 10);
 
-        $.each(this.gameQuestions, function (index, value) {
-            setTimeout(function () {
-                bbTrivia.qDisplay(value);
-            }, 2 * 1000);
+        // $.each(this.gameQuestions, function (index, value) {
+        //     setTimeout(function () {
+        //         bbTrivia.qDisplay(value);
+        //     }, 2 * 1000);
+        // })
+
+        // for(question in this.gameQuestions){
+        this.qDisplay(this.gameQuestions[this.counter]);
+        $('.answer-options').on('click', function () {
+            console.log('You clicked on answer');
+            if (bbTrivia.counter < bbTrivia.gameQuestions.length) {
+                bbTrivia.counter++;
+                bbTrivia.qDisplay(bbTrivia.gameQuestions[bbTrivia.counter]);
+            }
+
         })
+        // this.counter++;
+        // }
     },
 
     // select n number of items from a given object
-    // DAMN PROUD OF THIS ONE RIGHT HERE  :)
+    // DAMN PROUD OF THIS ONE :)
     selectXRandom: function (object, qty) {                                      // function that takes an object array as an argument and returns a 'qty' of random items from it
         var randomItems = [];                                                    // create an array to house selected items
         var arrayKeys = Object.keys(object);                                     // create an array of all keys in object
         while (randomItems.length < qty) {                                       // while there still randoms items to select
             var item = arrayKeys[Math.floor(Math.random() * arrayKeys.length)];  // select a random item
-            if (randomItems.includes(item) === false) {                           // if the selected item has not already been selected, then
-                randomItems.push(item);                                            // add it to the array of selected items
+            if (randomItems.includes(item) === false) {                          // if the selected item has not already been selected, then
+                randomItems.push(item);                                          // add it to the array of selected items
             }
         }
         return randomItems;
@@ -226,10 +238,11 @@ var bbTrivia = {
 // - timeout for 2 seconds before running timer function to allow player to read question
 
 
-    qDisplay: function (x) {                                                         // function that takes the question number as an argument then,
-        x = parseInt(x);                                                             // ensure selection is being passed as a number
-        $('#qStage').text(this.qaBank[x].question);                                  // Displays selected question to screen
-        for (item in this.qaBank[x].answers) {                                       // Iterates through answers array for given question
+    qDisplay: function (x) {                                                     // function that takes the question number as an argument then,
+        x = parseInt(x);                                                         // ensure selection is being passed as a number
+        $('#aStage').empty();                                                    // clear question stage
+        $('#qStage').text(this.qaBank[x].question);                              // Displays selected question to screen
+        for (item in this.qaBank[x].answers) {                                   // Iterates through answers array for given question
             var answer = this.qaBank[x].answers[item];
             $('#aStage').append('<div><label class="btn btn-primary answer-options"><input type="radio" name="options" value=' + answer + '/>' + answer + '</label></div>');  // and displays the questions as radio buttons
         }
