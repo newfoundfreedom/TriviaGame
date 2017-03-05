@@ -1,7 +1,22 @@
-.container h1 {
-    background-color: greenyellow;
+
+.jumbotron {
+    background: url('../images/breaking-bad.jpg');
+    background-repeat: no-repeat;
+    background-position: center top;
+    -webkit-background-size: 100%;
+    background-size: 100%;
+
+    /*background-size: 100% auto;*/
+    margin: 0px;
 }
 
-.answer-options input {
-    list-style-type: none;
+.push-spaces {
+    height: 300px;
+    margin: 0px;
+}
+
+#qStage {
+    margin: 30px;
+    font-size: x-large;
+
 }
