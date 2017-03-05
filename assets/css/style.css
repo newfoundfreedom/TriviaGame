@@ -3,11 +3,9 @@
     background: url('../images/breaking-bad.jpg');
     background-repeat: no-repeat;
     background-position: center top;
-    -webkit-background-size: 100%;
     background-size: 100%;
-
-    /*background-size: 100% auto;*/
     margin: 0px;
+    color: #fff;
 }
 
 .push-spaces {
@@ -20,3 +18,36 @@
     font-size: x-large;
 
 }
+
+.btn-hover {
+    color: #333;
+    background-color: #fff;
+    border: 1px solid #fff;
+    border-radius: 0;
+}
+
+.btn-hover:hover {
+    background-color: #efefef;
+    border: 1px solid #adadad;
+}
+
+.btn-correct, .btn-correct:hover{
+    color: #015600;;
+    background-color: #bfecc7;
+    border: 1px solid #015600;
+    border-radius: 0;
+}
+
+.btn-wrong, .btn-wrong:hover{
+    color: #920008;
+    background-color: #ffbfc7;
+    border: 1px solid #920008;
+    border-radius: 0;
+}
+
+#timerStage {
+    height: 50px;
+    font-size: x-large;
+}
+
+
