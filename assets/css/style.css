@@ -10,17 +10,26 @@
 
 #title {
     position: absolute;
-    top: 290px;
-
+    top: 340px;
 }
+
+#timer {
+    position: absolute;
+    top: 340px;
+    right: 50px;
+}
+
+
+
 .push-spaces {
-    height: 300px;
+    height: 350px;
     margin: 0px;
 }
 
 #qStage {
     margin: 30px;
     font-size: x-large;
+    font-weight: 400;
 
 }
 
@@ -36,27 +45,126 @@
     border: 1px solid #adadad;
 }
 
-.btn-correct, .btn-correct:hover{
+.btn-correct, .btn-correct:hover {
     color: #015600;;
     background-color: #bfecc7;
     border: 1px solid #015600;
     border-radius: 0;
 }
 
-.btn-wrong, .btn-wrong:hover{
+.btn-wrong, .btn-wrong:hover {
     color: #920008;
     background-color: #ffbfc7;
     border: 1px solid #920008;
     border-radius: 0;
 }
 
-#timerStage {
-    height: 30px;
-    font-size: x-large;
+.endQ {
+    font-size: 16px;
 }
 
-.endQ {
-    font-size: smaller;
+.endA {
+    font-size: 15px;
+}
+
+.panel {
+    border-radius: 0;
+}
+
+.panel-heading {
+    background-color: #efefef;
+    /*border: 1px solid #adadad;*/
+    border-radius: 0;
+}
+
+.aNeutral {
+    color: #666;
+    background-color: #fff;
+    border: 1px solid #fff;
+    border-radius: 0;
+}
+
+
+/*MEDIA QUERIES*/
+
+/* Large desktops and laptops */
+@media (min-width: 1200px) {
+#title {
+    top: 335px;
+    font-size: 50px;
+}
+    #timer {
+        top: 335px;
+        right: 50px;
+        font-size: 50px;
+    }
+.push-spaces {
+    height: 325px;
+}
+}
+
+/* Landscape tablets and medium desktops */
+@media (min-width: 992px) and (max-width: 1199px) {
+    #title {
+        top: 285px;
+        font-size: 40px;
+    }
+    #timer {
+        top: 285px;
+        right: 25px;
+        font-size: 40px;
+    }
+    .push-spaces {
+        height: 250px;
+    }
+}
+
+/* Portrait tablets and small desktops */
+@media (min-width: 768px) and (max-width: 991px) {
+    #title {
+        top: 190px;
+        font-size: 32px;
+    }
+    #timer {
+        top: 190px;
+        right: 25px;
+        font-size: 32px;
+    }
+    .push-spaces {
+        height: 150px;
+    }
+}
+
+/* Landscape phones and portrait tablets */
+@media (max-width: 767px) {
+    #title {
+        top: 125px;
+        font-size: 28px;
+    }
+    #timer {
+        top: 125px;
+        right: 25px;
+        font-size: 28px;
+    }
+    .push-spaces {
+        height: 110px;
+    }
+}
+
+/* Portrait phones and smaller */
+@media (max-width: 480px) {
+    #title {
+        top: 100px;
+        font-size: 24px;
+    }
+    #timer {
+        top: 100px;
+        right: 25px;
+        font-size: 24px;
+    }
+    .push-spaces {
+        height: 80px;
+    }
 }
 
 

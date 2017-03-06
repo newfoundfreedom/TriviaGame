@@ -387,57 +387,57 @@ var bbTrivia = {
                 if (qa[i].playerChoice === qa[i].correct) {
                     correctA++;
                 }
-                
                 $('#qStage').html('<h1>You got ' + correctA + ' answers correct</h1>');
                 $('<div>').html('<br><h3>Game Summary</h3>').appendTo('#qStage');
-
-                for (i in qa) {  // for each question in game questions
-                    $('<div>')
-                        .addClass('panel panel-default')
-                        .attr('id', 'q' + i)
-                        .appendTo('#qStage');
-                    $('<div>')
-                        .addClass('panel-heading text-center')
-                        .text(qa[i].q)
-                        .appendTo('#q' + i);
-                    let aOptions = [qa[i].a1, qa[i].a2, qa[i].a3, qa[i].a4];  // Array of answer Options
-                    for (j in aOptions) {                                // for each answer option
-                        if (aOptions[j] === qa[i].correct) {
-                            $('<div>')
-                                .addClass('btn btn-sm btn-block disabled btn-correct')
-                                .text(aOptions[j])
-                                .appendTo('#qStage');
-                        }
-                        else if (aOptions[j] === qa[i].playerChoice) {
-                            $('<button>')
-                                .addClass('btn btn-sm btn-block disabled btn-wrong')
-                                .text(aOptions[j])
-                                .appendTo('#qStage');
-                        }
-                        else {
-                            $('<button>')
-                                .addClass('btn btn-sm btn-block disabled btn-hover')
-                                .text(aOptions[j])
-                                .appendTo('#qStage');
-                        }
-
+                $('<div>')
+                    .addClass('panel panel-default')
+                    .attr('id', 'q' + i)
+                    .appendTo('#summaryStage');
+                $('<div>')
+                    .addClass('panel-heading text-center endQ')
+                    .text(qa[i].q)
+                    .appendTo('#q' + i);
+                $('<div>')
+                    .addClass('panel-body')
+                    .attr('id', 'a' + i)
+                    .appendTo('#q' + i);
+                let aOptions = [qa[i].a1, qa[i].a2, qa[i].a3, qa[i].a4];
+                for (j in aOptions) {
+                    if (aOptions[j] === qa[i].correct) {
+                        $('<div>')
+                            .addClass('col-xs-6 col-xs-offset-3 btn-correct endA text-center')
+                            .text(aOptions[j])
+                            .appendTo('#a' + i);
                     }
+                    else if (aOptions[j] === qa[i].playerChoice) {
+                        $('<div>')
+                            .addClass('col-xs-6 col-xs-offset-3 btn-wrong endA text-center')
+                            .text(aOptions[j])
+                            .appendTo('#a' + i);
+                    }
+                    else {
+                        $('<div>')
+                            .addClass('col-xs-6 col-xs-offset-3 aNeutral endA text-center')
+                            .text(aOptions[j])
+                            .appendTo('#a' + i);
+                    }
+
                 }
             }
         },
 
         // TIMER FUNCTIONS ---------------------------------------------------------------------------
-        startTimer: function () {                                     // function that starts timer when called
-            bbTrivia.seconds = 15;                                    // set timer to 15 seconds
-            bbTrivia.intervalID = setInterval(this.decrement, 1000);  // set timer to decrement every second
-            $("#timer").html(bbTrivia.seconds).fadeIn(100);           // initialize timer display
+        startTimer: function () {                                             // function that starts timer when called
+            bbTrivia.seconds = 15;                                            // set timer to 15 seconds
+            bbTrivia.intervalID = setInterval(this.decrement, 1000);          // set timer to decrement every second
+            $("#timer").html(bbTrivia.seconds).fadeIn(100);                   // initialize timer display
         },
         decrement: function () {                                              // function that decrements timer
             bbTrivia.seconds--;                                               // decrement number of seconds
             $("#timer").html(bbTrivia.seconds).fadeIn(100);                   // display current number of seconds to screen
             if (bbTrivia.seconds === 0) {                                     // if timer runs out
                 bbTrivia.stopTimer();                                         //   then stop the timer
-                $('#timer').text('OUT OF TIME');                              //   remove timer from board
+                $('#timer').text('---');                              //   remove timer from board
                 $('.a-option').switchClass('btn-hover', 'btn-wrong', 1000);   //   change button styles to represent a wrong guess on all questions
                 $('.a-option').attr('disabled', 'true');                      //   disable all buttons from further click until next question is presented
                 bbTrivia.gameQuestions[bbTrivia.qCount].playerChoice = null;  //   store a blank as players guess in the question object as a new key/value pair
