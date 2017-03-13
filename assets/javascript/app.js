@@ -437,7 +437,7 @@ var bbTrivia = {
             $("#timer").html(bbTrivia.seconds).fadeIn(100);                   // display current number of seconds to screen
             if (bbTrivia.seconds === 0) {                                     // if timer runs out
                 bbTrivia.stopTimer();                                         //   then stop the timer
-                $('#timer').text('---');                              //   remove timer from board
+                $('#timer').text('---');                                      //   remove timer from board
                 $('.a-option').switchClass('btn-hover', 'btn-wrong', 1000);   //   change button styles to represent a wrong guess on all questions
                 $('.a-option').attr('disabled', 'true');                      //   disable all buttons from further click until next question is presented
                 bbTrivia.gameQuestions[bbTrivia.qCount].playerChoice = null;  //   store a blank as players guess in the question object as a new key/value pair
@@ -447,14 +447,6 @@ var bbTrivia = {
         stopTimer: function () {                                      // function that stops the timer
             clearInterval(bbTrivia.intervalID);                       // clear the intervalID
         }
-
-// TODO: quiz end function
-// - Loop through all game questions
-// - compare each user guess to correct answer
-// - display number correct and number wrong at top of page
-// - re-display questions and answers marking the one they guessed and the correct one
-
-    }
-    ; // end of bbTrivia object
+    }; // end of bbTrivia object
 
 bbTrivia.startGame();
